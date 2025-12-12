@@ -102,14 +102,7 @@ When a user makes a request to the application:
 ### AWS Requirements
 
 1. **AWS Account** with appropriate permissions
-2. **IAM User/Role** with the following policies:
-   - `AmazonEKSClusterPolicy`
-   - `AmazonEKSWorkerNodePolicy`
-   - `AmazonEC2ContainerRegistryFullAccess`
-   - `AmazonVPCFullAccess`
-   - `IAMFullAccess` (for IRSA setup)
-   - `ElasticLoadBalancingFullAccess`
-
+2. **IAM User/Role** with appropriately scoped policies
 3. **AWS CLI configured**:
    ```bash
    aws configure
@@ -124,7 +117,7 @@ Running this infrastructure incurs AWS charges for:
 - NAT Gateway (~$0.045/hour + data)
 - Load Balancer (~$0.025/hour)
 
-**Estimated cost**: ~$6-8/day when running
+**Estimated cost**: ~$6/day when running
 
 ## Deployment Guide
 
@@ -389,7 +382,3 @@ aws ecr get-login-password --region us-east-2 | docker login --username AWS --pa
 2. Create a feature branch
 3. Make changes and add tests
 4. Submit a pull request
-
-## License
-
-MIT License - See LICENSE file for details
