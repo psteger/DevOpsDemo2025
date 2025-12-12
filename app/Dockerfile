@@ -17,9 +17,19 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o fiberapp .
 # --- Runtime Stage ---
 FROM alpine:3.23
 
-WORKDIR /root/
+# Create non-root user
+RUN addgroup -g 1001 appgroup && \
+    adduser -D -u 1001 -G appgroup appuser
+
+WORKDIR /app
 
 COPY --from=builder /app/fiberapp .
+
+# Set ownership and permissions
+RUN chown appuser:appgroup /app/fiberapp && \
+    chmod +x /app/fiberapp
+
+USER 1001
 
 EXPOSE 8080
 
