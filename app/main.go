@@ -8,8 +8,11 @@ import (
 func main() {
 	app := fiber.New()
 
-	// Use Fiber's health middleware for /healthz
-	app.Use("/healthz", healthcheck.New())
+	// Use Fiber's health middleware with /healthz endpoint
+	app.Use(healthcheck.New(healthcheck.Config{
+		LivenessEndpoint:  "/healthz",
+		ReadinessEndpoint: "/readyz",
+	}))
 
 	// REST API
 	app.Get("/api/message", MessageHandler)
