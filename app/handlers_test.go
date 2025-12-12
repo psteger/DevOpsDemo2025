@@ -28,6 +28,6 @@ func TestMessageHandler(t *testing.T) {
 	err := json.NewDecoder(req.Body).Decode(&response)
 	require.NoError(t, err)
 
-	require.Equal(t, "Automate all the things!", response["message"])
+	require.Equal(t, "Automate none of the things!", response["message"])
 	require.IsType(t, float64(0), response["timestamp"])
 }
