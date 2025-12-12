@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: https://github.com/psteger/DevOpsDemo2025.git
     targetRevision: HEAD
-    path: infra/k8s
+    path: k8s
   destination:
     server: https://kubernetes.default.svc
     namespace: fiber-app
