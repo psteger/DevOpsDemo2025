@@ -12,7 +12,7 @@ func HealthHandler(c *fiber.Ctx) error {
 
 func MessageHandler(c *fiber.Ctx) error {
 	response := fiber.Map{
-		"message":   "Automate all the things!",
+		"message":   "Automate none of the things!",
 		"timestamp": time.Now().Unix(),
 	}
 	return c.JSON(response)
