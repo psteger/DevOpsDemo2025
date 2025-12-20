@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: fiber-app
-        image: 246314649600.dkr.ecr.us-east-2.amazonaws.com/devops-demo/fiber-app:latest
+        image: IMAGE_PLACEHOLDER
         ports:
         - containerPort: 8080
           protocol: TCP

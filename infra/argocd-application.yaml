@@ -14,6 +14,9 @@ spec:
     repoURL: https://github.com/psteger/DevOpsDemo2025.git
     targetRevision: HEAD
     path: k8s
+    kustomize:
+      images:
+        - IMAGE_PLACEHOLDER=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${IMAGE_REPO}:${IMAGE_TAG}
   destination:
     server: https://kubernetes.default.svc
     namespace: fiber-app

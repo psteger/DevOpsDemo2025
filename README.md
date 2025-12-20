@@ -178,14 +178,34 @@ Or use the provided script:
 ./build-and-push.sh
 ```
 
-### Step 5: Deploy ArgoCD Application
+### Step 5: Configure ArgoCD Application Image Parameters
+
+The ArgoCD application uses parameterized image settings for flexibility across environments. Configure the image variables:
 
 ```bash
-kubectl apply -f infra/argocd-application.yaml
+# Set your environment variables
+export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+export AWS_REGION=us-east-2
+export IMAGE_REPO=devops-demo/fiber-app
+export IMAGE_TAG=latest
 ```
+
+Deploy the ArgoCD application with substituted values:
+
+```bash
+# Substitute variables and apply
+envsubst < infra/argocd-application.yaml | kubectl apply -f -
+```
+
+Alternatively, manually edit [infra/argocd-application.yaml](infra/argocd-application.yaml#L17-L19) and replace the placeholders:
+- `${AWS_ACCOUNT_ID}` - Your AWS account number
+- `${AWS_REGION}` - Target AWS region (e.g., us-east-2)
+- `${IMAGE_REPO}` - ECR repository name (e.g., devops-demo/fiber-app)
+- `${IMAGE_TAG}` - Image tag (e.g., latest, v1.0.0, git commit SHA)
 
 This configures ArgoCD to:
 - Monitor the `k8s/` directory in the Git repository
+- Use Kustomize to inject the correct image reference
 - Automatically sync changes to the cluster
 - Self-heal if resources drift from desired state
 
